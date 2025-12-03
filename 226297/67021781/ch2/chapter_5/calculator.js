@@ -1,106 +1,89 @@
-const digits = document.querySelectorAll('button')
-const display = document.getElementById('display')
- 
-var n1 = 0
-var n2 = ""
-var operator = ""
- 
-digits.forEach((digit, index) => {
-    number = parseInt(digit.innerText)
-    operators = ['+', '-', '*', '/']
- 
+
+const digits = document.querySelectorAll('button');
+const display = document.getElementById('display');
+
+let n1 = 0;
+let n2 = "";
+let operator = "";
+
+digits.forEach((digit) => {
+    const operators = ['+', '-', '*', '/'];
+
     digit.addEventListener('click', () => {
- 
-        if (digit.innerText == "C") {
-            display.innerText = "0"
-            n1 = 0
-            n2 = ""
+        console.log("Pressed button:", digit.innerText);
+        console.log("Before operation: n1 =", n1, "n2 =", n2, "operator =", operator, "display =", display.textContent);
+
+        if (digit.innerText === "C") {
+            display.innerText = "0";
+            n1 = 0; n2 = ""; operator = "";
         } else if (operators.includes(digit.innerText)) {
-            n1 = parseInt(display.textContent)
-            n2 = ""
-            display.textContent += digit.innerText
-            operator = digit.innerText
-        } else if (digit.innerText == "=") {
-            n2 = parseInt(n2)
-            display.textContent = cal(n1, n2, operator)
-            n2 = ""
-        }
-        else {
-            if (display.innerText == "0") {
-                display.innerText = ""
+            n1 = parseFloat(display.textContent);
+            n2 = "";
+            display.textContent += digit.innerText;
+            operator = digit.innerText;
+        } else if (digit.innerText === "=") {
+            n2 = parseFloat(n2);
+            display.textContent = cal(n1, n2, operator);
+            n2 = "";
+        } else if (digit.innerText === ".") {
+            if (!n2.includes(".")) {
+                if (n2 === "") n2 = "0";
+                n2 += ".";
+                display.textContent += ".";
             }
-            display.textContent += digit.innerText
-            n2 += digit.innerText
-            console.log(n1, n2)
+        } else {
+            if (display.innerText === "0") display.innerText = "";
+            display.textContent += digit.innerText;
+            n2 += digit.innerText;
         }
-    })
- 
-})
- 
-cal = (n1, n2, oper) => {
-    if (oper == "+")
-        return n1 + n2
-    else if (oper == "-")
-        return n1 - n2
-    else if (oper == "*")
-        return n1 * n2
-    else if (oper == "/")
-        return n1 / n2
-}
- 
-// ปิดการกด Enter ใน form เพื่อไม่ให้ submit
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-    }
+
+        console.log("After operation: n1 =", n1, "n2 =", n2, "operator =", operator, "display =", display.textContent);
+    });
 });
- 
- 
- 
-// --- รองรับการกดจากคีย์บอร์ด ---
-document.addEventListener("keydown", function (event) {
+
+// ฟังก์ชันคำนวณ
+function cal(n1, n2, oper) {
+    switch(oper) {
+        case "+": return n1 + n2;
+        case "-": return n1 - n2;
+        case "*": return n1 * n2;
+        case "/": return n2 === 0 ? "Error" : n1 / n2;
+        default: return n2;
+    }
+}
+
+// ป้องกัน Enter submit form
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") event.preventDefault();
+});
+
+// รองรับการกดคีย์บอร์ด
+document.addEventListener("keydown", function(event) {
     const key = event.key;
- 
-    // ถ้ากดตัวเลข
-    if (!isNaN(key)) {
+    console.log("Key pressed:", key);
+    console.log("Before operation: n1 =", n1, "n2 =", n2, "operator =", operator, "display =", display.textContent);
+
+    if (!isNaN(key)) { // ตัวเลข
         if (display.innerText === "0") display.innerText = "";
         display.innerText += key;
         n2 += key;
-        return;
-    }
- 
-    // ถ้ากดเครื่องหมาย + - * /
-    if (['+', '-', '*', '/'].includes(key)) {
-        n1 = parseInt(display.textContent);
+    } else if (['+', '-', '*', '/'].includes(key)) { // เครื่องหมาย
+        n1 = parseFloat(display.textContent);
         operator = key;
         display.textContent += key;
         n2 = "";
-        return;
-    }
- 
-    // ถ้ากด Enter ให้คำนวณ
-    if (key === "Enter") {
-        n2 = parseInt(n2);
+    } else if (key === "Enter") { // คำนวณ
+        n2 = parseFloat(n2);
         display.textContent = cal(n1, n2, operator);
         n2 = "";
-        return;
-    }
- 
-    // ถ้ากด Backspace ให้ลบตัวสุดท้าย
-    if (key === "Backspace") {
+    } else if (key === "Backspace") { // ลบตัวสุดท้าย
         display.textContent = display.textContent.slice(0, -1);
         n2 = n2.slice(0, -1);
- 
         if (display.textContent === "") display.textContent = "0";
-        return;
-    }
- 
-    // ถ้ากด Escape หรือ C ให้เคลียร์
-    if (key === "Escape" || key.toLowerCase() === "c") {
+    } else if (key === "Escape" || key.toLowerCase() === "c") { // เคลียร์
         display.innerText = "0";
-        n1 = 0;
-        n2 = "";
-        operator = "";
-        return;
+        n1 = 0; n2 = ""; operator = "";
     }
+
+    console.log("After operation: n1 =", n1, "n2 =", n2, "operator =", operator, "display =", display.textContent);
 });
