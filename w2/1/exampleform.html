@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex</title>
+</head>
+<body>
+    <form action="exampleform.html">
+        <label for="username">Username:* </label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="password">Password:* </label>
+        <input type="password" name="password" id="password" required>
+        
+
+        <label for="studentid">Student Id:*</label>
+        <input type="number" name="studentid" min="10000000" max="99999999" id="studentid"required>
+
+        <br><label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="gender" value="0"> Male
+        <input type="radio" name="gender" id="gender" value="1"> Female
+
+        <br><label for="sport">Favourite Sport:</label>
+        <input type="checkbox" name="favouritesport" id="sport" value="0"> Tennis
+        <input type="checkbox" name="favouritesport" id="sport" value="1"> Basketball
+        <input type="checkbox" name="favouritesport" id="sport" value="2"> Football
+
+        <br><label for="province">Province:</label>
+        <select name="province" id="province">
+            <option value="0">Lamphun</option>
+            <option value="1">Chiangmai</option>
+            <option value="2">Lampang</option>
+            <option value="3" selected>Phayao</option>
+        </select>
+
+        <br><label for="manifest">Manifest:</label>
+        <textarea name="manifest" id="manifest"></textarea>
+
+        <br><button type="submit">Enter</button>
+    </form>
+</body>
+</html>
