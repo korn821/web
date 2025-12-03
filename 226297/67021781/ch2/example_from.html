@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body >
+    <h1>หน้าลงทะเบียน</h1>
+    <form action="a.html">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required><br>
+
+        <label for="username">Password :</label>
+        <input type="password" name="Password" id="Password" required><br>
+        
+        <label for="code">Student ID :</label>
+        <input type="number" name="code" id="code"min="10000000" max="99999999"><br>
+
+        <label for="gender">Gender :</label>
+        <input type="radio" name="gender" id="gender" value="0" required> Male
+        <input type="radio" name="gender" id="gender" value="1" required> Female
+        <input type="radio" name="gender" id="gender" value="2" required> Other<br>
+        
+        <label for="Favorite sport">Favorite sport :</label>
+        <input type="checkbox" name="Favorite sport" id="Favorite sport" value="0" > เทนนิส
+        <input type="checkbox" name="Favorite sport" id="Favorite sport" value="1" > ฟุตบอล
+        <input type="checkbox" name="Favorite sport" id="Favorite sport" value="2" > ตะกร้อ
+        <input type="checkbox" name="Favorite sport" id="Favorite sport" value="3" > เทเบิลเทนนิส<br>
+
+        <label for="province">Province:</label>
+        <select name="province" id="province">
+            <option>กรุณาเลือกจังหวัด</option>
+            <option value="1">กรุงเทพฯ</option>
+            <option value="2"selected>พะเยา</option>
+            <option value="3">ปธุมธานี</option>
+            <option value="4">นนธบุรี</option>
+        </select><br>
+
+        <button type="reset">Clear</button>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
